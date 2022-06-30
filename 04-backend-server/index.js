@@ -7,23 +7,21 @@ const portServer = process.env.PORT;
 
 // Crear el servidor de Express
 const app = express();
+
+// Configuración CORS
 app.use( cors() );
+
+// Lectura y parse del body
+app.use( express.json() );
 
 // Base de datos
 dbConnection();
 
-// mean_user
-// qdR2PtE3feknLH2z
-
 // Rutas
-app.get( '/', (req, res) => {
+app.use( '/api/usuarios', require('./routes/usuarios') );
+app.use( '/api/login', require('./routes/auth') );
 
-	res.status(400).json({
-		ok: true,
-		msg: 'Hola mundo',
-	});
 
-});
 
 
 app.listen( portServer, () => {
